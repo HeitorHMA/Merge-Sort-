@@ -1,12 +1,23 @@
 function mergeSort(array){
-    console.log(array.lenght)
-    if(array.lenght < 2){
+    if(array.length < 2){
         return array
     }
-    else{
-        const mid = Math.floor(array.lenght)
-        console.log(array.lenght)
+        const mid = Math.floor(array.length /2)
+        const leftArray = array.slice(0,mid)
+        const rightArray = array.slice(mid)
+        return merge(mergeSort(rightArray),mergeSort(leftArray))
     }
-}
-const arr = [2,2,2,2]
-mergeSort(arr)
+    function merge(rightArray,leftArray){
+        const sortedArray = []
+        while(rightArray && leftArray){
+            if(rightArray[0] <= leftArray[0]){
+                sortedArray.push(rightArray.shift())
+            }
+            else{
+                sortedArray.push(leftArray.shift())
+            }
+            return[...sortedArray, ...leftArray , ...rightArray]
+        }
+    }
+const arr = [2,3,9,1]
+console.log(mergeSort(arr))
